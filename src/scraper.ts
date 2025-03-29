@@ -74,4 +74,4 @@ async function main() {
 /**
  * エントリーポイント
  */
-(async () => main())();
+(async () => await main())();
