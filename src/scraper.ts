@@ -11,11 +11,11 @@ dotenv.config();
  * @param subscriptionCode サブスクリプションコード (必要に応じて)
  * @return ダウンロードオブジェクト
  */
-async function downloadOdoo(
+const downloadOdoo = async (
   page: Page,
   platformVersion: string,
   subscriptionCode: string,
-): Promise<Download | null> {
+): Promise<Download | null> => {
   // Odoo のダウンロードページに移動
   await page.goto('https://www.odoo.com/page/download');
   // ダウンロードボタンをクリックしてウィザードを表示
@@ -33,12 +33,12 @@ async function downloadOdoo(
   await download.saveAs("./downloads/" + download.suggestedFilename());
 
   return download;
-}
+};
 
 /**
  * メイン関数
  */
-async function main() {
+const main = async () => {
   const browser = await chromium.launch({
     channel: 'chrome',
     headless: false,
