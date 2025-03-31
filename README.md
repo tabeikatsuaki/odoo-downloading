@@ -32,7 +32,7 @@ npx playwright install chrome
 npm run build
 ```
 
-    ※srcディレクトリ以下のTypeScriptファイルがトランスパイルされてdistディレクトリにJavaScriptファイルなどが生成されます。
+※ srcディレクトリ以下のTypeScriptファイルがトランスパイルされてdistディレクトリにJavaScriptファイルなどが生成されます。
 
 ## JavaScriptを実行
 
@@ -40,7 +40,7 @@ npm run build
 npm run execute
 ```
 
-    ※これによりOdoo17とOdoo18の企業版の圧縮ファイルがdownloadsディレクトリにダウンロードされます。
+※ これによりOdoo17とOdoo18の企業版の圧縮ファイルがdownloadsディレクトリにダウンロードされます。
 
 ## Odoo17企業版の圧縮ファイルを指定のディレクトリにコピー
 
