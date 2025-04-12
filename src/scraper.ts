@@ -1,5 +1,7 @@
 import { chromium, Page, Download } from 'playwright-core';
 import dotenv from 'dotenv';
+import * as fs from 'fs/promises';
+import * as path from 'path';
 
 // .env ファイルを読み込む
 dotenv.config();
@@ -29,8 +31,23 @@ const downloadOdoo = async (
     page.waitForEvent('download'),
     page.click('.oe_download_button'), // もう一度クリックする必要がある場合
   ]);
+
+  // ダウンロード先のパスを生成
+  const filePath = path.join('./downloads', download.suggestedFilename());
+
+  // ファイルが既に存在する場合は削除
+  try {
+    await fs.unlink(filePath);
+    console.log(`${filePath} を削除しました。`);
+  } catch (error) {
+    // ファイルが存在しない場合は何もしない
+  }
+
   // ダウンロードしたファイルを保存
-  await download.saveAs("./downloads/" + download.suggestedFilename());
+  await download.saveAs(filePath);
+
+//   // ダウンロードしたファイルを保存
+//   await download.saveAs("./downloads/" + download.suggestedFilename());
 
   return download;
 };
