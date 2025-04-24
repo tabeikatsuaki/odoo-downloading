@@ -8,6 +8,7 @@ dotenv.config();
 
 /**
  * Odoo のダウンロードページから指定されたバージョンの Odoo をダウンロードする関数
+ *
  * @param page Playwright の Page オブジェクト
  * @param platformVersion ダウンロードする Odoo のプラットフォームバージョン
  * @param subscriptionCode サブスクリプションコード (必要に応じて)
@@ -46,23 +47,17 @@ const downloadOdoo = async (
   // ダウンロードしたファイルを保存
   await download.saveAs(filePath);
 
-//   // ダウンロードしたファイルを保存
-//   await download.saveAs("./downloads/" + download.suggestedFilename());
-
   return download;
 };
 
 /**
  * メイン関数
+ *
+ * @param {Page} page - Playwrightのページオブジェクト
+ * @returns {Promise<void>}
  */
 test('Odooソースファイルダウンロード', async ({ page }) => {
-  // const browser = await chromium.launch({
-  //   channel: 'chrome',
-  //   headless: true,
-  // });
-  // const context = await browser.newContext();
-  // const page = await context.newPage();
-  test.setTimeout(60 * 1000); // タイムアウト時間を伸長
+  test.setTimeout(60 * 1000); // タイムアウト時間を伸長（デフォルトは30秒）
 
   // .env からサブスクリプションコードを取得
   const subscriptionCode = process.env.SUBSCRIPTION_CODE;
@@ -70,26 +65,18 @@ test('Odooソースファイルダウンロード', async ({ page }) => {
   // サブスクリプションコードを取得できなかった場合はエラーを表示して終了
   if (!subscriptionCode) {
     console.error("サブスクリプションコードが設定されていないため終了します。");
-    // await browser.close();
     return;
   }
 
   console.log("ダウンロードを開始します。");
 
-  // // Odoo 17e をダウンロード
-  // await downloadOdoo(page, 'src_17e', subscriptionCode);
+  // Odoo 17e をダウンロード
+  await downloadOdoo(page, 'src_17e', subscriptionCode);
   // Odoo 18e をダウンロード
   await downloadOdoo(page, 'src_18e', subscriptionCode);
 
   // // スクリーンショットを撮影 (確認用)
   // await page.screenshot({ path: "screenshot.png" });
 
-  // await browser.close();
-
   console.log("ダウンロードが完了しました。");
 });
-
-/**
- * エントリーポイント
- */
-// (async () => await main())();
