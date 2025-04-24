@@ -57,7 +57,7 @@ const downloadOdoo = async (
  * @returns {Promise<void>}
  */
 test('Odooソースファイルダウンロード', async ({ page }) => {
-  test.setTimeout(60 * 1000); // タイムアウト時間を伸長（デフォルトは30秒）
+  test.setTimeout(120 * 1000); // タイムアウト時間を伸長（デフォルトは30秒）
 
   // .env からサブスクリプションコードを取得
   const subscriptionCode = process.env.SUBSCRIPTION_CODE;
